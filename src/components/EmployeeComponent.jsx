@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { createEmployee } from '../services/EmployeeService'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const EmployeeComponent = () => {
 
@@ -9,11 +9,8 @@ const EmployeeComponent = () => {
     const [email, setEmail] = useState('')
     const navigator = useNavigate();
 
-    // const handleFirstName = (e) => setFirstName(e.target.value)
-    // const handleLastName = (e) => setLastName(e.target.value)
-    // const handleEmail = (e) => setEmail(e.target.value)
-
-     const [errors, setErrors] = useState({
+    const {id} = useParams();
+    const [errors, setErrors] = useState({
         first_name: '',
         last_name: '',
         email: ''
@@ -62,12 +59,24 @@ const EmployeeComponent = () => {
         return valid;
     }
 
+    function pageTitle(){
+        if(id){
+            return <h2 className='text-center'>Update Employee</h2>
+        }else{
+            return <h2 className='text-center'>Add Employee</h2>
+        }
+
+    }
+
   return (
     <div className='conatainer'>
         <br></br>
         <div className='row'>
             <div className='card col-md-6 offset-md-3 offset-md-3'>
-                <h2 className='text-center'>Add Employee</h2>
+                {/* <h2 className='text-center'>Add Employee</h2> */}
+                {
+                    pageTitle()
+                }
                 <div className='card-body'>
                     <form>
                         <div className='form-group mb-2'>

@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 const ListEmployeeComponent = () => {
 
     const[employees, setEmployees] = useState([])
-
     const navigator = useNavigate();
 
     useEffect(() => {
@@ -20,27 +19,9 @@ const ListEmployeeComponent = () => {
         navigator('/add-employee')
     }
 
-    // const dummyData = [
-    //     {
-    //         "id": 1,
-    //         "firstName": "Ramesh",
-    //         "lastName": "Fadatare",
-    //         "email": "ramesh@gmail.com"
-    //     },
-    //     {
-    //         "id": 2,
-    //         "firstName": "Umesh",
-    //         "lastName": "Fadatare",
-    //         "email": "umesh@gmail.com"
-    //     },
-    //     {
-    //         "id": 3,
-    //         "firstName": "Jamesh",
-    //         "lastName": "Fadatare",
-    //         "email": "jamesh@gmail.com"
-    //     }
-    // ]
-
+    function updateEmployee(id) {
+        navigator(`/edit-employee/${id}`)
+    }
 
   return (
     <div className='container'>
@@ -53,6 +34,7 @@ const ListEmployeeComponent = () => {
                     <th>Employee Fist Name</th>
                     <th>Employee Last Name</th>
                     <th>Employee Email Id</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,6 +45,9 @@ const ListEmployeeComponent = () => {
                             <td>{employee.first_name}</td>
                             <td>{employee.last_name}</td>
                             <td>{employee.email}</td>
+                            <td>
+                                <button className='btn btn-info' onClick={() => updateEmployee(employee.id)}>Update</button>
+                            </td>
                         </tr>
                     )
                 }
